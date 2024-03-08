@@ -1,0 +1,18 @@
+---
+
+import Layout from '../layout/Layout.astro';
+import Card from '../components/Card.astro';
+const response = await fetch("http://localhost:3000/tendencias");
+const datos = await response.json();
+---
+<Layout titulo="Inicio">
+	<h3 class="text-center py-3">({datos.length}) Tendencias</h3>
+	<div class="row">
+	{
+		datos.map((item)=>(
+			<Card  pelicula={item}/>	
+		))
+
+	}
+	</div>
+</Layout>

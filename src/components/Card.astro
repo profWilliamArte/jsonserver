@@ -1,0 +1,33 @@
+---
+const { pelicula } = Astro.props;
+const ruta="../jsonserver/peliculas";
+---
+<div class="col-md-4 col-lg-3 col-xl-2 mb-3">
+    <div class="card h-100">
+        <div class="card-header p-0">
+            <img src={ruta+pelicula.poster_path} alt={pelicula.title} class="img-fluid">
+        </div>
+        <div class="card-body text-center">
+            <p>{pelicula.title}</p>
+            <p>{pelicula.release_date}</p>
+            
+        </div>
+        <div class="card-footer">
+            <a href={`/jsonserver/detalles/`+pelicula.id} class="btn btn-outline-danger d-grid btn-sm">Detalle</a>
+        </div>
+    </div>
+</div>
+<style>
+    .card{
+        transition: all 0.9s;
+    }
+    .card:hover{
+        transform: scale(1.02);
+        cursor: pointer;
+        color:white;
+        border-radius: 2px;
+        background: #191818;
+        box-shadow:  20px 20px 60px #4f4d4d,
+             -20px -20px 60px #454343;
+    }
+</style>

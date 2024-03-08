@@ -1,0 +1,43 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from '../../layout/Layout.astro';
+
+export async function getStaticPaths() {
+    const response = await fetch("http://localhost:3000/peliculas");
+    const datos = await response.json();
+    return datos.map(item =>{
+        return {
+            params: {id:item.id}
+        }
+    })
+   
+}
+const { id } = Astro.params;
+const response = await fetch(`http://localhost:3000/peliculas/${id}`);
+const pelicula = await response.json();
+---
+<Layout titulo="Detalle">
+    <div class="py-5">
+        <div class="row">
+            <div class="col-md-5 text-center">
+                <img src={`../jsonserver/peliculas`+pelicula.poster_path} alt={pelicula.title} class="img-fluid img-thumbnail">
+            </div>
+            <div class="col-md-7">
+                <h3 class="text-start py-3"><b>Titulo: </b>{pelicula.title}</h3>
+                <h4 class="text-start py-3"><b>Lenguaje original: </b>{pelicula.original_language}</h4>
+                <h4 class="text-start py-3"><b>Titulo original: </b>{pelicula.original_title}</h4>
+                <h4 class="text-start py-3"><b>Medio: </b>{pelicula.media_type}</h4>
+                <h4 class="text-start py-3"><b>Popularidad: </b>{pelicula.popularity}</h4>
+                <h4 class="text-start py-3"><b>Fecha de Lanzamiento: </b>{pelicula.release_date}</h4>
+                <h4 class="text-start py-3"><b>Average: </b>{pelicula.vote_average}</h4>
+                <h4 class="text-start py-3"><b>Votos: </b>{pelicula.vote_count}</h4>
+                <p class="text-start py-3"><b>Resumen: </b>{pelicula.overview}</p>
+                <a href="javascript:history.back()" class="btn btn-outline-danger"> Volver Atrás</a>
+                
+            </div>
+        </div>
+       
+    </div>
+	
+	
+</Layout>

@@ -1,0 +1,7 @@
+1) 
+
+
+
+para crear el servidor
+1) npm i json-server
+   npx json-server db.json
